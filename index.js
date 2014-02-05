@@ -13,8 +13,6 @@ module.exports = function(config){
     directory : './.cache',
   });
 
-  fs.mkdirsSync(configuration.directory);
-
   function keyToPath(key){
     return path.join(configuration.directory,key.substr(0,2),key + '.json');
   }
@@ -31,13 +29,16 @@ module.exports = function(config){
     var filepath = keyToPath(key);
     fs.createFile(filepath, function(err){
       if(err) return callback(err);
-      return fs.writeFile(filepath, data, {encoding: 'utf-8'}, callback);
+      return fs.writeFile(filepath, JSON.stringify(data), {encoding: 'utf-8'}, callback);
     });
   };
 
   var read = function(key, callback){
     var filepath = keyToPath(key);
-    return fs.readFile(filepath, {encoding : 'utf-8'}, callback);
+    fs.readFile(filepath, {encoding : 'utf-8'}, function(err, data){
+      if(err) return callback(err);
+      else return callback(null, JSON.parse(data));
+    });
   };
 
   var has = function(key, callback){
@@ -51,15 +52,24 @@ module.exports = function(config){
   };
 
   var keys = function(callback){
-    var keys = [];
-    walker(configuration.directory).
-      on('file', function(file, stat){	  
-	console.log('file found',file);
-	keys.push(pathToKey(file));
-      }).
-      on('end', function(){
-	callback(null, keys);
-      });
+    var returner = [];
+    fs.exists(configuration.directory, function(exists){
+      if(!exists) return callback(null, returner);
+
+      walker(configuration.directory).
+	on('file', function(file, stat){
+	  returner.push(pathToKey(file));
+	}).
+	on('end', function(){
+	  callback(null, returner);
+	});
+    });
+  };
+
+  var size = function(callback){
+    keys(function(err, result){ 
+      return callback(result.length);
+    });
   };
 
   return {
@@ -69,6 +79,7 @@ module.exports = function(config){
     remove : remove,
     clear : clear,
     keys : keys,
+    size : size,
     version : pkg.version
   };
 
