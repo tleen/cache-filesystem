@@ -32,7 +32,7 @@ describe('versioning', function(){
 describe('cachy storage interface exists', function(){
   var cache = require('..')(config);
 
-  var fxns = ['write', 'has', 'read', 'remove', 'clear', 'keys'];
+  var fxns = ['write', 'has', 'read', 'remove', 'clear', 'keys', 'size'];
   describe('interface has', function(){
     _.each(fxns, function(fxn){
       it(fxn + '()', function(){
