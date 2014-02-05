@@ -1,6 +1,6 @@
-cache-filesystem
+cachy-filesystem
 ================
 
-[![Build Status](https://travis-ci.org/tleen/cache-filesystem.png?branch=master)](https://travis-ci.org/tleen/cache-filesystem)
+[![Build Status](https://travis-ci.org/tleen/cachy-filesystem.png?branch=master)](https://travis-ci.org/tleen/cachy-filesystem)
 
-A simple cache for node that stores to the filesystem.
+A filesystem storage engine for [cachy](https://travis-ci.org/tleen/cachy) caches.
