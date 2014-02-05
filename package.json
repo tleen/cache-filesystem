@@ -1,5 +1,5 @@
 {
-  "name" : "cache-filesystem",
+  "name" : "cachy-filesystem",
   "description" : "Filesystem based storage for cachy caches",
   "main" : "./index",
   "author" : "Thomas Leen",
