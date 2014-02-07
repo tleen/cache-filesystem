@@ -3,7 +3,7 @@
   "description" : "Filesystem based storage for cachy caches",
   "main" : "./index",
   "author" : "Thomas Leen",
-  "version" : "0.0.4",
+  "version" : "0.0.5",
   "repository" : {
     "type" : "git",
     "url" : "https://github.com/tleen/cachy-filesystem.git"
@@ -29,6 +29,7 @@
   }, 
   "keywords" : [
     "cache",
+    "cachy",
     "filesystem",
     "simple"
   ]
